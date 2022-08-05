@@ -1,25 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { selectAllBooks, selectBooksLoading } from '../store/book.selectors';
 
 import { BookListComponent } from './book-list.component';
 
 describe('BookListComponent', () => {
-  let component: BookListComponent;
-  let fixture: ComponentFixture<BookListComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BookListComponent ]
+      declarations: [ BookListComponent ],
+      providers: [
+        provideMockStore({
+          selectors: [
+            { selector: selectBooksLoading, value: true },
+            { selector: selectAllBooks, value: [] },
+          ]
+        })
+      ]
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BookListComponent);
-    component = fixture.componentInstance;
+  it('should show a loading text', () => {
+    const fixture = TestBed.createComponent(BookListComponent);
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    const element = fixture.nativeElement;
+    expect(element.querySelector('.loader').textContent).toBe('Loading ...');
   });
 });

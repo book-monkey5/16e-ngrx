@@ -4,6 +4,7 @@ import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { BookStoreService } from '../../shared/book-store.service';
 import { loadBooks, loadBooksSuccess } from './book.actions';
+import { hot, cold } from 'jasmine-marbles';
 
 import { BookEffects } from './book.effects';
 import { book } from './test-helper';
@@ -35,17 +36,11 @@ describe('BookEffects', () => {
     spyOn(bs, 'getAll').and.callFake(() => of(books));
 
     // Action auslösen
-    actions$ = of(loadBooks());
+    actions$ = hot('--a', { a: loadBooks() });
+    const expected = cold('--b', { b: loadBooksSuccess({ data: books }) });
 
-    // Actions aus Effect empfangen
-    let dispatchedAction: Action | undefined;
-    effects.loadBooks$.subscribe(action => {
-      dispatchedAction = action;
-    });
-
-    // Actions vergleichen
-    const expectedAction = loadBooksSuccess({ data: books });
-    expect(dispatchedAction).toEqual(expectedAction);
+    // Datenströme vergleichen
+    expect(effects.loadBooks$).toBeObservable(expected);
 
     // Serviceaufruf prüfen
     expect(bs.getAll).toHaveBeenCalled();

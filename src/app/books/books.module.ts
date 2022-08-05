@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromBook from './store/book.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BookEffects } from './store/book.effects';
+import { BookEffects as BookEffectsAlternative } from './store/book.effects.alternative';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { BookEffects } from './store/book.effects';
     CommonModule,
     BooksRoutingModule,
     StoreModule.forFeature(fromBook.bookFeatureKey, fromBook.reducer),
-    EffectsModule.forFeature([BookEffects])
+    EffectsModule.forFeature([
+      // BookEffects,
+      BookEffectsAlternative
+    ])
   ]
 })
 export class BooksModule { }

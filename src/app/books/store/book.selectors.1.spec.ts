@@ -4,11 +4,9 @@ import { book } from './test-helper';
 describe('Book Selectors', () => {
   it('should select all books', () => {
     const books = [book(1), book(2), book(3)];
-    const state = {
-      book: { books, loading: false }
-    };
+    const bookState = { books, loading: false };
 
-    const result = selectAllBooks(state);
+    const result = selectAllBooks.projector(bookState);
     expect(result).toEqual(books);
   });
 });
