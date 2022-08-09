@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { BookStoreService } from '../../shared/book-store.service';
 import { loadBooks } from '../store/book.actions';
 import { selectAllBooks, selectBooksLoading } from '../store/book.selectors';
 
