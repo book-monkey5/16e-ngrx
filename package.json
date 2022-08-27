@@ -23,7 +23,7 @@
     "@ngrx/store": "^14.0.2",
     "@ngrx/store-devtools": "^14.0.2",
     "angular-date-value-accessor": "^2.0.1",
-    "book-monkey-styles": "^0.12.0",
+    "book-monkey-styles": "^0.13.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
