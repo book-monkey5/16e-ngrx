@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
+import { Book } from '../../shared/book';
 import { loadBooks } from '../store/book.actions';
 import { selectAllBooks, selectBooksLoading } from '../store/book.selectors';
 
@@ -10,10 +12,13 @@ import { selectAllBooks, selectBooksLoading } from '../store/book.selectors';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent {
-  books$ = this.store.select(selectAllBooks);
-  loading$ = this.store.select(selectBooksLoading);
+  books$: Observable<Book[]>;
+  loading$: Observable<boolean>;
 
   constructor(private store: Store) {
+    this.books$ = this.store.select(selectAllBooks);
+    this.loading$ = this.store.select(selectBooksLoading);
+
     this.store.dispatch(loadBooks());
   }
 }
