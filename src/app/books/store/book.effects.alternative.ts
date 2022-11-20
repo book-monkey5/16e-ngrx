@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+
 import * as BookActions from './book.actions';
 import { BookStoreService } from '../../shared/book-store.service';
-import { Store } from '@ngrx/store';
 import { selectAllBooks } from './book.selectors';
 
 @Injectable()

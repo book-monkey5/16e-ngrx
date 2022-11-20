@@ -1,4 +1,5 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
+
 import { Book } from '../../shared/book';
 import * as BookActions from './book.actions';
 
